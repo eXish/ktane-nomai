@@ -1,12 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
 using System.Linq;
-using Newtonsoft.Json;
 using Nomai;
-
-//Nobody is allowed to fix this code!!!
 
 public class Functionality : MonoBehaviour {
 
@@ -232,11 +228,11 @@ public class Functionality : MonoBehaviour {
             }
         }
         Debug.LogFormat("[Nomai #{0}] Action table:", _moduleId);
-        Debug.LogFormat("[Nomai #{0}]    0 1 2 3 4 5", _moduleId);
+        Debug.LogFormat("[Nomai #{0}] 0 1 2 3 4 5", _moduleId);
         int ct = 0;
         foreach (int[] x in planetActions)
         {
-            Debug.LogFormat("[Nomai #{6}] {7} [{0} {1} {2} {3} {4} {5}]", x[0].ToString().Replace("-1", "x"), x[1].ToString().Replace("-1", "x"), x[2].ToString().Replace("-1", "x"), x[3].ToString().Replace("-1", "x"), x[4].ToString().Replace("-1", "x"), x[5].ToString().Replace("-1", "x"), _moduleId, ct);
+            Debug.LogFormat("[Nomai #{6}] [{0} {1} {2} {3} {4} {5}] {7}", x[0].ToString().Replace("-1", "x"), x[1].ToString().Replace("-1", "x"), x[2].ToString().Replace("-1", "x"), x[3].ToString().Replace("-1", "x"), x[4].ToString().Replace("-1", "x"), x[5].ToString().Replace("-1", "x"), _moduleId, ct);
             ct++;
         }
         Debug.LogFormat("[Nomai #{0}] (Row = Planet traveled from | Column = Planet traveled to | x = Not possible | 0 = Strike | 1 = Nothing | 2 = Sixth Location)", _moduleId);
@@ -641,9 +637,6 @@ public class Functionality : MonoBehaviour {
         previous3 = new Action[3];
 
         Debug.LogFormat("[Nomai #{0}] Timer reset, you can now interact with the module again.", _moduleId);
-
-        //Debug.LogFormat("Order:{0}{1}{2}{3}{4}{5}", planetsOrder[0], planetsOrder[1], planetsOrder[2], planetsOrder[3], planetsOrder[4], planetsOrder[5]);
-        //Debug.LogFormat("IsSolved:{0} IsSixth:{1}", _isSolved, _isSixth);
     }
 
     void onFakeStrike()
@@ -883,7 +876,7 @@ public class Functionality : MonoBehaviour {
         return a < b ? a : b;
     }
 
-    //twitch playz
+    //twitch plays
     #pragma warning disable 414
     private readonly string TwitchHelpMessage = @"!{0} press <#/main/sl> [Presses the specified planet '#', the main planet, or the status light] | Valid planets are 0-4 from top to bottom then left to right | Chainable with spaces";
     #pragma warning restore 414
