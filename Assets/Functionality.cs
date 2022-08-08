@@ -228,11 +228,11 @@ public class Functionality : MonoBehaviour {
             }
         }
         Debug.LogFormat("[Nomai #{0}] Action table:", _moduleId);
-        Debug.LogFormat("[Nomai #{0}] 0 1 2 3 4 5", _moduleId);
+        Debug.LogFormat("[Nomai #{0}]    0 1 2 3 4 5", _moduleId);
         int ct = 0;
         foreach (int[] x in planetActions)
         {
-            Debug.LogFormat("[Nomai #{6}] [{0} {1} {2} {3} {4} {5}] {7}", x[0].ToString().Replace("-1", "x"), x[1].ToString().Replace("-1", "x"), x[2].ToString().Replace("-1", "x"), x[3].ToString().Replace("-1", "x"), x[4].ToString().Replace("-1", "x"), x[5].ToString().Replace("-1", "x"), _moduleId, ct);
+            Debug.LogFormat("[Nomai #{6}] {7} [{0} {1} {2} {3} {4} {5}]", x[0].ToString().Replace("-1", "x"), x[1].ToString().Replace("-1", "x"), x[2].ToString().Replace("-1", "x"), x[3].ToString().Replace("-1", "x"), x[4].ToString().Replace("-1", "x"), x[5].ToString().Replace("-1", "x"), _moduleId, ct);
             ct++;
         }
         Debug.LogFormat("[Nomai #{0}] (Row = Planet traveled from | Column = Planet traveled to | x = Not possible | 0 = Strike | 1 = Nothing | 2 = Sixth Location)", _moduleId);
