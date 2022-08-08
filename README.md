@@ -1,9 +1,9 @@
-Nomai regular module for KTaNE
-
-Idea by BakersDozenBagels
-
-Status light code from Double-Oh by Timwi
-
-Inspired by the wonderful game Outer Wilds (Go play it!)
-
-Thank you to my testers GhostSalt, RazorBlade, and Jakob
+Implemented by a user who wishes to remain anonymous<br/>
+Maintained by eXish<br/>
+<br/>
+==Steam Workshop Link==<br/>
+https://steamcommunity.com/sharedfiles/filedetails/?id=2846437023<br/>
+<br/>
+==Manual Links==<br/>
+HTML: https://ktane.timwi.de/HTML/Nomai.html<br/>
+PDF: https://ktane.timwi.de/PDF/Nomai.pdf<br/>
