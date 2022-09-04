@@ -398,7 +398,12 @@ public class Functionality : MonoBehaviour {
         {
             timeRatio = (220f - i) / 220f;
             barControl.gameObject.transform.localScale = new Vector3(timeRatio,0.01f,0.01f);
-            yield return new WaitForSeconds(0.1f);
+            float t = 0f;
+            while (t < 0.1f)
+            {
+                yield return null;
+                t += Time.deltaTime;
+            }
         }
         timeRatio = 0f;
         barControl.gameObject.transform.localScale = new Vector3(0f, 0.01f, 0.01f);
@@ -480,7 +485,12 @@ public class Functionality : MonoBehaviour {
                     timeEventsTimes.RemoveAt(e);
                 }
             }
-            yield return new WaitForSeconds(0.1f);
+            float t = 0f;
+            while (t < 0.1f)
+            {
+                yield return null;
+                t += Time.deltaTime;
+            }
         }
         timeRatio = 1;
         barControl.gameObject.transform.localScale = new Vector3(1f, 0.01f, 0.01f);
