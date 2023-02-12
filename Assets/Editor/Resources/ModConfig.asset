@@ -18,8 +18,8 @@ MonoBehaviour:
     that prevents you from solving the module. This module is based on the game Outer
     Wilds and may contain spoilers.\n\r\nThis is a reuploaded item from a creator
     who wishes to remain anonymous.\r\n\r\nHTML: https://ktane.timwi.de/HTML/Nomai.html\nPDF:
-    https://ktane.timwi.de/PDF/Nomai.pdf\n\r\nNomai (nomai) v1.2.2\nMaintained by
+    https://ktane.timwi.de/PDF/Nomai.pdf\n\r\nNomai (nomai) v1.2.3\nMaintained by
     eXish\r\nTwitch Plays supported"
-  version: 1.2.2
+  version: 1.2.3
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 4f6d10f1fe300b94497c07c43d1bf3ce, type: 3}

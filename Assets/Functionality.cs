@@ -376,9 +376,13 @@ public class Functionality : MonoBehaviour {
         if (present.Contains(false))
             goto redo;
 
-        Debug.LogFormat("[Nomai #{0}] Deactivation method: {1}", _moduleId, DEACTMETHODS[deactMethod - 1]);
+        goalColor = Random.Range(1, 4);
 
-        goalColor = Random.Range(1,4);
+        //Make sure the deactivation condition does not give an unavoidable strike
+        if (deactMethod == 7 && (planetActions[0][5] == 2 || planetActions[1][5] == 2 || planetActions[2][5] == 2 || planetActions[3][5] == 2 || planetActions[4][5] == 2 || planetActions[5][5] == 2) && colorActionsLight[5] != goalColor && colorActionsMain[5] != goalColor && colorActionsLight[6] != goalColor && colorActionsMain[6] != goalColor)
+            goto redo;
+
+        Debug.LogFormat("[Nomai #{0}] Deactivation method: {1}", _moduleId, DEACTMETHODS[deactMethod - 1]);
 
         Debug.LogFormat("[Nomai #{0}] Goal color: {1}", _moduleId, COLORS[goalColor]);
 
