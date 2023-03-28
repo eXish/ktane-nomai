@@ -17,7 +17,7 @@ MonoBehaviour:
   description: "Explore and try different things to stop the time looping mechanism
     that prevents you from solving the module. This module is based on the game Outer
     Wilds and may contain spoilers.\n\r\nHTML: https://ktane.timwi.de/HTML/Nomai.html\nPDF:
-    https://ktane.timwi.de/PDF/Nomai.pdf\n\r\nNomai (nomai) v1.2.3\nModule by BakersDozenBagels,
+    https://ktane.timwi.de/PDF/Nomai.pdf\n\r\nNomai (nomai) v1.2.3\nModule by Anonymous,
     maintained by eXish\r\nTwitch Plays supported"
   version: 1.2.3
   outputFolder: build
