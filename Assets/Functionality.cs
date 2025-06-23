@@ -152,6 +152,7 @@ public class Functionality : MonoBehaviour {
         }
         mainButtonRenderer.material = buttonMats[planetPatterns[5]];
 
+        redoAll:
         planetActions = new int[6][] { new int[6] { 1, 1, 1, 1, 1, 1 }, new int[6] { 1, 1, 1, 1, 1, 1 }, new int[6] { 1, 1, 1, 1, 1, 1 }, new int[6] { 1, 1, 1, 1, 1, 1 }, new int[6] { 1, 1, 1, 1, 1, 1 }, new int[6] { 1, 1, 1, 1, 1, 1 } };
 
         //Make all actions valid, except for two per planet
@@ -227,18 +228,9 @@ public class Functionality : MonoBehaviour {
                 }
             }
         }
-        Debug.LogFormat("[Nomai #{0}] Action table:", _moduleId);
-        Debug.LogFormat("[Nomai #{0}]    0 1 2 3 4 5", _moduleId);
-        int ct = 0;
-        foreach (int[] x in planetActions)
-        {
-            Debug.LogFormat("[Nomai #{6}] {7} [{0} {1} {2} {3} {4} {5}]", x[0].ToString().Replace("-1", "x"), x[1].ToString().Replace("-1", "x"), x[2].ToString().Replace("-1", "x"), x[3].ToString().Replace("-1", "x"), x[4].ToString().Replace("-1", "x"), x[5].ToString().Replace("-1", "x"), _moduleId, ct);
-            ct++;
-        }
-        Debug.LogFormat("[Nomai #{0}] (Row = Planet traveled from | Column = Planet traveled to | x = Not possible | 0 = Strike | 1 = Nothing | 2 = Sixth Location)", _moduleId);
 
         //Determine deactivation condition.
-        redo:
+        redoColors:
         switch (ordered[5])
         {
             case 1:
@@ -353,7 +345,7 @@ public class Functionality : MonoBehaviour {
         }
         //Make sure the sun has no interactions which change colors
         if (colorActionsLight[sunPos] != 0 || colorActionsMain[sunPos] != 0)
-            goto redo;
+            goto redoColors;
         //Make sure all colors are present only once
         bool[] present = new bool[3];
         for (int i = 0; i < 7; i++)
@@ -361,30 +353,56 @@ public class Functionality : MonoBehaviour {
             if (colorActionsLight[i] != 0)
             {
                 if (present[colorActionsLight[i] - 1])
-                    goto redo;
+                    goto redoColors;
                 else
                     present[colorActionsLight[i] - 1] = true;
             }
             if (colorActionsMain[i] != 0)
             {
                 if (present[colorActionsMain[i] - 1])
-                    goto redo;
+                    goto redoColors;
                 else
                     present[colorActionsMain[i] - 1] = true;
             }
         }
         if (present.Contains(false))
-            goto redo;
+            goto redoColors;
 
         goalColor = Random.Range(1, 4);
 
         //Make sure the deactivation condition does not give an unavoidable strike
         //"Navigate to the sun.", sixth location accessed by navigating to the sun
         if (deactMethod == 5 && (planetActions[0][sunPos] == 2 || planetActions[1][sunPos] == 2 || planetActions[2][sunPos] == 2 || planetActions[3][sunPos] == 2 || planetActions[4][sunPos] == 2 || planetActions[5][sunPos] == 2))
-            goto redo;
-        //"Navigate from any other planet to this planet.", sixth location accessed by navigating from/to initial main planet
-        if (deactMethod == 7 && (planetActions[0][5] == 2 || planetActions[1][5] == 2 || planetActions[2][5] == 2 || planetActions[3][5] == 2 || planetActions[4][5] == 2 || planetActions[5][0] == 2 || planetActions[5][1] == 2 || planetActions[5][2] == 2 || planetActions[5][3] == 2 || planetActions[5][4] == 2))
-            goto redo;
+            goto redoAll;
+        //"Navigate from any other planet to this planet.", sixth location accessed by navigating to initial main planet
+        if (deactMethod == 7 && (planetActions[0][5] == 2 || planetActions[1][5] == 2 || planetActions[2][5] == 2 || planetActions[3][5] == 2 || planetActions[4][5] == 2))
+            goto redoAll;
+        //"Navigate from any other planet to this planet.", sixth location accessed by navigating from initial main planet
+        bool goalInReach = false;
+        int colorsNum = 0;
+        for (int i = 5; i < 7; i++)
+        {
+            if (colorActionsLight[i] != 0)
+                colorsNum++;
+            if (colorActionsMain[i] != 0)
+                colorsNum++;
+            if (colorActionsLight[i] == goalColor)
+                goalInReach = true;
+            if (colorActionsMain[i] == goalColor)
+                goalInReach = true;
+        }
+        if (deactMethod == 7 && (planetActions[5][0] == 2 || planetActions[5][1] == 2 || planetActions[5][2] == 2 || planetActions[5][3] == 2 || planetActions[5][4] == 2 || planetActions[5][sunPos] == 2) && (colorsNum == 0 || (colorsNum == 1 && !goalInReach)))
+            goto redoColors;
+
+        Debug.LogFormat("[Nomai #{0}] Action table:", _moduleId);
+        Debug.LogFormat("[Nomai #{0}]    0 1 2 3 4 5", _moduleId);
+        int ct = 0;
+        foreach (int[] x in planetActions)
+        {
+            Debug.LogFormat("[Nomai #{6}] {7} [{0} {1} {2} {3} {4} {5}]", x[0].ToString().Replace("-1", "x"), x[1].ToString().Replace("-1", "x"), x[2].ToString().Replace("-1", "x"), x[3].ToString().Replace("-1", "x"), x[4].ToString().Replace("-1", "x"), x[5].ToString().Replace("-1", "x"), _moduleId, ct);
+            ct++;
+        }
+        Debug.LogFormat("[Nomai #{0}] (Row = Planet traveled from | Column = Planet traveled to | x = Not possible | 0 = Strike | 1 = Nothing | 2 = Sixth Location)", _moduleId);
 
         Debug.LogFormat("[Nomai #{0}] Deactivation method: {1}", _moduleId, DEACTMETHODS[deactMethod - 1]);
 
