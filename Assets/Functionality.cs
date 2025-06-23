@@ -379,7 +379,11 @@ public class Functionality : MonoBehaviour {
         goalColor = Random.Range(1, 4);
 
         //Make sure the deactivation condition does not give an unavoidable strike
-        if (deactMethod == 7 && (planetActions[0][5] == 2 || planetActions[1][5] == 2 || planetActions[2][5] == 2 || planetActions[3][5] == 2 || planetActions[4][5] == 2 || planetActions[5][5] == 2) && colorActionsLight[5] != goalColor && colorActionsMain[5] != goalColor && colorActionsLight[6] != goalColor && colorActionsMain[6] != goalColor)
+        //"Navigate to the sun.", sixth location accessed by navigating to the sun
+        if (deactMethod == 5 && (planetActions[0][sunPos] == 2 || planetActions[1][sunPos] == 2 || planetActions[2][sunPos] == 2 || planetActions[3][sunPos] == 2 || planetActions[4][sunPos] == 2 || planetActions[5][sunPos] == 2))
+            goto redo;
+        //"Navigate from any other planet to this planet.", sixth location accessed by navigating from/to initial main planet
+        if (deactMethod == 7 && (planetActions[0][5] == 2 || planetActions[1][5] == 2 || planetActions[2][5] == 2 || planetActions[3][5] == 2 || planetActions[4][5] == 2 || planetActions[5][0] == 2 || planetActions[5][1] == 2 || planetActions[5][2] == 2 || planetActions[5][3] == 2 || planetActions[5][4] == 2))
             goto redo;
 
         Debug.LogFormat("[Nomai #{0}] Deactivation method: {1}", _moduleId, DEACTMETHODS[deactMethod - 1]);
